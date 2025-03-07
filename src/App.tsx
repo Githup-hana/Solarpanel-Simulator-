@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import "./App.css";
 
 const SolarPanelSimulator = () => {
   const [city, setCity] = useState("");
-  const [panelPower, setPanelPower] = useState(0);
+  const [panelPower, setPanelPower] = useState(300);
   const [sunHours, setSunHours] = useState("");
   const [energyOutput, setEnergyOutput] = useState("");
   const APikey = "20a219b25c8408423faad62c51b4b8bd";
@@ -42,14 +43,16 @@ const SolarPanelSimulator = () => {
   };
 
   return (
-    <div>
-      <h2>🌞 Solarpanel-Simulator</h2>
+    <div className="solar-panel-simulator">
+    <h2>🌞 Solarpanel-Simulator</h2>
 
+    <div className="input-container">
       <input
         type="text"
         value={city}
         onChange={handleCityChange}
         placeholder="Gib eine Stadt ein..."
+        className="input"
       />
 
       <input
@@ -57,22 +60,27 @@ const SolarPanelSimulator = () => {
         value={panelPower}
         onChange={handlePanelPowerChange}
         placeholder="Panel-Leistung (Watt)"
+        className="input"
       />
-
-      <button onClick={fetchSunHours}>Berechnen</button>
-
-      {sunHours && (
-        <div>
-          <h3>Sonnenstunden: {sunHours} Stunden</h3>
-        </div>
-      )}
-
-      {energyOutput && (
-        <div>
-          <h3>Berechnete Energieproduktion: {energyOutput} kWh</h3>
-        </div>
-      )}
     </div>
+
+    <button onClick={fetchSunHours} className="calculate-button">
+      Berechnen
+    </button>
+
+    {sunHours && (
+      <div className="result">
+        <h3>Sonnenstunden: {sunHours} Stunden</h3>
+      </div>
+    )}
+
+    {energyOutput && (
+      <div className="result">
+        <h3>Berechnete Energieproduktion: {energyOutput} kWh</h3>
+      </div>
+    )}
+  </div>
+
   );
 };
 
